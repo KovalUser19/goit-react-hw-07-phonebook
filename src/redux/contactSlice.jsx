@@ -34,14 +34,9 @@ const handleRejected = (state, action) => {
        .addCase(fetchContacts.rejected, handleRejected)
        .addCase(addContact.pending, handlePending)
        .addCase(addContact.fulfilled, (state, action) => {
-           console.log("Current state:", state);
-  console.log("Action payload:", action.payload);
-
          state.contacts.isLoading = false;
          state.contacts.error = null;
-           /* state.contacts.items.push(action.payload) */
-           state.contacts.items = [...state.contacts.items, action.payload];
-
+         state.contacts.items = [...state.contacts.items, action.payload];
        })
        .addCase(addContact.rejected, handleRejected)
        .addCase(deleteContact.pending, handlePending)
@@ -51,21 +46,6 @@ const handleRejected = (state, action) => {
          state.contacts.items = state.contacts.items.filter(el => el.id !== action.payload.id);
        })
    }
-    /* addContact: (state, action) => {
-      state.contacts = [...state.contacts, action.payload];
-    },
-    onDeleteContact: (state, action) => {
-      state.contacts = state.contacts.filter(el => el.id !== action.payload);
-    }, */
-
 });
 
-/* const persistConfig = {
-  key: 'contact',
-  storage,
-}; */
-/* export const pesistContactReduser = persistReducer(
-  persistConfig, contactSlice.reducer); */
-
 export const contactReduser = contactSlice.reducer;
- /* export const {fetchContacts, addContact, deleteContact } = contactSlice.actions; */
